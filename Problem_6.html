@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input{
+            display: block;
+            margin: 20px;
+        }
+        .error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+    </style>
+</head>
+<body>
+    
+    <form>
+        <input type="text" placeholder="type name" value="">
+        <div class="error-message" id="name-error"></div>
+       <input type="email" placeholder="type email" value="">
+       <input type="password" placeholder="type password" value="">
+       <div class="error-message" id="password-error"></div>
+       <input type="submit" value="Submit">
+    </form>
+    
+</body>
+</html>
+
+<script>
+    document.querySelector("form").addEventListener("submit",submitForm);
+    function submitForm(){
+        event.preventDefault()
+        document.querySelector("#name-error").textContent = "";
+        document.querySelector("#password-error").textContent = "";
+
+        let name = document.querySelector("input[type='text']").value
+        let email = document.querySelector("input[type='email']").value
+        let password = document.querySelector("input[type='password']").value
+
+        let isValid = true;
+
+
+     if (name.trim() === "") {
+    document.querySelector("#name-error").textContent = "Name is required.";
+    isValid = false;
+     } else if (!/^[a-zA-Z]+$/.test(name)) {
+    document.querySelector("#name-error").textContent = "Name must contain only letters.";
+    isValid = false;
+    }
+    
+    if (password.trim() === "") {
+        document.querySelector("#password-error").textContent = "Password is required.";
+        isValid = false;
+    } else if (password.length < 9) {
+        document.querySelector("#password-error").textContent = "Password must be at least 6 characters.";
+        isValid = false;
+    }
+
+    if (isValid) {
+        console.log(name, email, password);
+    }
+    }
+</script>
